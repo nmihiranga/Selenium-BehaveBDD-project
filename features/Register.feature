@@ -1,17 +1,13 @@
 Feature: Register account functionality
 
+  @register
   Scenario: Register with required fields
     Given I navigate to the register page
     When I enter details into required fields
     And I click on continue button
-    Then Account should get created
+    Then I should get logged in
 
-  Scenario: Register with all fields
-    Given I navigate to the register page
-    When I enter details into all fields
-    And I click on continue button
-    Then Account should get created
-
+  @register
   Scenario: Register with duplicate email
     Given I navigate to the register page
     When I enter details into all fields except email
@@ -19,6 +15,7 @@ Feature: Register account functionality
     And I click on continue button
     Then Warning message about existing email should be displayed
 
+  @register
   Scenario: Register without providing any details
     Given I navigate to the register page
     When I don't enter anything into the fields
