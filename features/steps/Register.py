@@ -7,11 +7,11 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from selenium.common.exceptions import NoAlertPresentException
 import os
 
+
+
+
 @given(u'I navigate to the register page')
 def step_impl(context):
-    context.driver = webdriver.Chrome()
-    context.driver.maximize_window()
-    context.driver.get('https://tech-demo.scandipwa.com/')
     context.driver.find_element(By.ID, 'myAccount').click()
     time.sleep(3)
     context.driver.find_element(By.XPATH, '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div/div/div/article/section/button').click()
