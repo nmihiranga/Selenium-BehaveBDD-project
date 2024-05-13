@@ -16,6 +16,7 @@ class LoginPage:
     password_id = 'password'
     login_btn_xpath = '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div/div/div/form/div[3]/button'
     fill_required_fields_warning_xpath = '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div/div/div/form/div[1]/div[2]/div'
+    create_account_xpath = '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div/div/div/article/section/button'
 
     login_details_incorrect_warning = 'The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.'
     fill_required_fields_warning = 'This field is required!'
@@ -42,3 +43,6 @@ class LoginPage:
 
     def fill_required_fields_warning_message(self):
         assert self.driver.find_element(By.XPATH, self.fill_required_fields_warning_xpath).text.__eq__(self.fill_required_fields_warning)
+
+    def click_create_account(self):
+        self.driver.find_element(By.XPATH, self.create_account_xpath).click()
