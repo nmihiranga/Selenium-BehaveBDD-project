@@ -21,11 +21,11 @@ def step_impl(context):
     time.sleep(3)
 
 
-@when(u'I enter valid email and valid password into the fields')
-def step_impl(context):
+@when(u'I enter valid {email} and valid {password} into the fields')
+def step_impl(context, email, password):
     context.login_page = LoginPage(context.driver)
-    context.login_page.enter_email('test@testt.com')
-    context.login_page.enter_password('A111$bbb')
+    context.login_page.enter_email(email)
+    context.login_page.enter_password(password)
     time.sleep(3)
 
 
@@ -42,11 +42,11 @@ def step_impl(context):
 
 
 
-@when(u'I enter invalid email and valid password into the fields')
-def step_impl(context):
+@when(u'I enter invalid email as {invalid_email} and valid password as {valid_password} into the fields')
+def step_impl(context, invalid_email, valid_password):
     context.login_page = LoginPage(context.driver)
-    context.login_page.enter_email('test@invalid.com')
-    context.login_page.enter_password('A111$bbb')
+    context.login_page.enter_email(invalid_email)
+    context.login_page.enter_password(valid_password)
     time.sleep(3)
 
 
@@ -56,19 +56,19 @@ def step_impl(context):
     context.login_page.login_details_incorrect_warning_message()
 
 
-@when(u'I enter valid email and invalid password into the fields')
-def step_impl(context):
+@when(u'I enter valid email as {valid_email} and invalid password as {invalid_password} into the fields')
+def step_impl(context, valid_email, invalid_password):
     context.login_page = LoginPage(context.driver)
-    context.login_page.enter_email('test@testt.com')
-    context.login_page.enter_password('invalid')
+    context.login_page.enter_email(valid_email)
+    context.login_page.enter_password(invalid_password)
     time.sleep(3)
 
 
-@when(u'I enter invalid email and invalid password into the fields')
-def step_impl(context):
+@when(u'I enter invalid email as {invalid_email} and invalid password as {invalid_password} into the fields')
+def step_impl(context, invalid_email, invalid_password):
     context.login_page = LoginPage(context.driver)
-    context.login_page.enter_email('test@invalid.com')
-    context.login_page.enter_password('invalid')
+    context.login_page.enter_email(invalid_email)
+    context.login_page.enter_password(invalid_password)
     time.sleep(3)
 
 

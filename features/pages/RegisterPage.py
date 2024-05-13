@@ -3,6 +3,9 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from selenium.common.exceptions import NoAlertPresentException
 import os
 
+
+
+
 class RegisterPage:
 
     def __init__(self, driver):

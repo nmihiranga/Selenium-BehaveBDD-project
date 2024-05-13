@@ -22,14 +22,14 @@ def step_impl(context):
     time.sleep(3)
 
 
-@when(u'I enter details into required fields')
-def step_impl(context):
+@when(u'I enter details into required fields as {firstname} {lastname} {email} {password} {confirm_password}')
+def step_impl(context, firstname, lastname, email, password, confirm_password):
     context.register_page = RegisterPage(context.driver)
-    context.register_page.enter_firstname('test')
-    context.register_page.enter_lastname('test')
-    context.register_page.enter_email('testn@n.com')
-    context.register_page.enter_password('A111$bbb')
-    context.register_page.enter_confirm_password('A111$bbb')
+    context.register_page.enter_firstname(firstname)
+    context.register_page.enter_lastname(lastname)
+    context.register_page.enter_email(email)
+    context.register_page.enter_password(password)
+    context.register_page.enter_confirm_password(confirm_password)
     time.sleep(3)
 
 
@@ -37,23 +37,24 @@ def step_impl(context):
 def step_impl(context):
     context.register_page = RegisterPage(context.driver)
     context.register_page.click_signup_button()
-    time.sleep(3)
+    time.sleep(5)
 
 
-@when(u'I enter details into all fields except email')
+@when(u'I enter below details into all fields except email')
 def step_impl(context):
     context.register_page = RegisterPage(context.driver)
-    context.register_page.enter_firstname('test')
-    context.register_page.enter_lastname('test')
-    context.register_page.enter_password('A111$bbb')
-    context.register_page.enter_confirm_password('A111$bbb')
-    time.sleep(3)
+    for row in context.table:
+        context.register_page.enter_firstname(row['firstname'])
+        context.register_page.enter_lastname(row['lastname'])
+        context.register_page.enter_password(row['password'])
+        context.register_page.enter_confirm_password(row['confirm_password'])
+        time.sleep(3)
 
 
-@when(u'I enter already registered email into email field')
-def step_impl(context):
+@when(u'I enter already registered email as {email} into email field')
+def step_impl(context, email):
     context.register_page = RegisterPage(context.driver)
-    context.register_page.enter_email('testn@n.com')
+    context.register_page.enter_email(email)
     time.sleep(3)
 
 
