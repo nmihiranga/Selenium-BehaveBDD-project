@@ -1,5 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import UnexpectedAlertPresentException
+from selenium.common.exceptions import NoAlertPresentException
+import os
+
 
 
 class HomePage:
@@ -13,13 +17,21 @@ class HomePage:
 
 
     homepage_title = 'Technology Homepage'
-    after_login_expected_text = 'Welcome, testFirst!'
+    after_login_expected_alert = 'You are successfully logged in!'
 
     def click_my_account(self):
         self.driver.find_element(By.ID, self.my_account_id).click()
 
     def check_if_logged_successfully(self):
-        assert self.driver.find_element(By.XPATH, self.after_login_real_text_xpath).text.__eq__(self.after_login_expected_text)
+        try:
+            alert = self.driver.switch_to.alert
+            alert_text = alert.text
+            assert alert_text.__eq__(self.after_login_expected_alert)
+            return True
+        except UnexpectedAlertPresentException:
+            return False
+        except NoAlertPresentException:
+            return False
 
     def check_homepage_title(self):
         assert self.driver.title.__eq__(self.homepage_title)

@@ -1,21 +1,28 @@
 Feature: Register account functionality
 
   @register
-  Scenario: Register with required fields
+  Scenario Outline: Register with required fields
     Given I navigate to the register page
-    When I enter details into required fields
+    When I enter details into required fields as <firstname> <lastname> <email> <password> <confirm_password>
     And I click on signup button
     Then I should get logged in
+    Examples:
+      | firstname  | lastname   | email             | password | confirm_password |
+      | testOneF   | testOneL   | testone@one.com   | A111$bbb | A111$bbb         |
+      | testTwoF   | testTwoL   | testtwo@one.com   | A111$bbb | A111$bbb         |
+      | testThreeF | testThreeL | testthree@one.com | A111$bbb | A111$bbb         |
 
-  @register
+  @register1
   Scenario: Register with duplicate email
     Given I navigate to the register page
-    When I enter details into all fields except email
-    And I enter already registered email into email field
+    When I enter below details into all fields except email
+      | firstname | lastname | password | confirm_password |
+      | test      | test     | A111$bbb | A111$bbb         |
+    And I enter already registered email as testone@one.com into email field
     And I click on signup button
     Then Warning message about existing email should be displayed
 
-  @register
+  @register1
   Scenario: Register without providing any details
     Given I navigate to the register page
     When I don't enter anything into the fields
