@@ -7,81 +7,75 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from selenium.common.exceptions import NoAlertPresentException
 import os
 
-
+from features.pages.HomePage import HomePage
+from features.pages.LoginPage import LoginPage
+from features.pages.RegisterPage import RegisterPage
 
 
 @given(u'I navigate to the register page')
 def step_impl(context):
-    context.driver.find_element(By.ID, 'myAccount').click()
+    context.home_page = HomePage(context.driver)
+    context.home_page.click_my_account()
     time.sleep(3)
-    context.driver.find_element(By.XPATH, '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div/div/div/article/section/button').click()
+    context.login_page = LoginPage(context.driver)
+    context.login_page.click_create_account()
     time.sleep(3)
 
 
 @when(u'I enter details into required fields')
 def step_impl(context):
-    context.driver.find_element(By.ID, 'firstname').send_keys('test')
-    context.driver.find_element(By.ID, 'lastname').send_keys('test')
-    context.driver.find_element(By.ID, 'email').send_keys('testn@n.com')
-    context.driver.find_element(By.ID, 'password').send_keys('A111$bbb')
-    context.driver.find_element(By.ID, 'confirm_password').send_keys('A111$bbb')
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.enter_firstname('test')
+    context.register_page.enter_lastname('test')
+    context.register_page.enter_email('testn@n.com')
+    context.register_page.enter_password('A111$bbb')
+    context.register_page.enter_confirm_password('A111$bbb')
     time.sleep(3)
 
 
-@when(u'I click on continue button')
+@when(u'I click on signup button')
 def step_impl(context):
-    context.driver.find_element(By.XPATH, '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div/div/div/form/div/button').click()
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.click_signup_button()
     time.sleep(3)
 
 
 @when(u'I enter details into all fields except email')
 def step_impl(context):
-    context.driver.find_element(By.ID, 'firstname').send_keys('test')
-    context.driver.find_element(By.ID, 'lastname').send_keys('test')
-    context.driver.find_element(By.ID, 'password').send_keys('A111$bbb')
-    context.driver.find_element(By.ID, 'confirm_password').send_keys('A111$bbb')
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.enter_firstname('test')
+    context.register_page.enter_lastname('test')
+    context.register_page.enter_password('A111$bbb')
+    context.register_page.enter_confirm_password('A111$bbb')
     time.sleep(3)
 
 
 @when(u'I enter already registered email into email field')
 def step_impl(context):
-    context.driver.find_element(By.ID, 'email').send_keys('testn@n.com')
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.enter_email('testn@n.com')
     time.sleep(3)
 
 
 @then(u'Warning message about existing email should be displayed')
 def step_impl(context):
-    try:
-        alert = context.driver.switch_to.alert
-        alertText = alert.text
-        expectedText = 'A customer with the same email address already exists in an associated website. '
-        assert alertText.__eq__(expectedText)
-        return True
-    except UnexpectedAlertPresentException:
-        return False
-    except NoAlertPresentException:
-        return False
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.existing_email_warning()
 
 
 
 @then(u'I don\'t enter anything into the fields')
 def step_impl(context):
-    context.driver.find_element(By.ID, 'firstname').send_keys('')
-    context.driver.find_element(By.ID, 'lastname').send_keys('')
-    context.driver.find_element(By.ID, 'password').send_keys('')
-    context.driver.find_element(By.ID, 'confirm_password').send_keys('')
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.enter_firstname('')
+    context.register_page.enter_lastname('')
+    context.register_page.enter_email('')
+    context.register_page.enter_password('')
+    context.register_page.enter_confirm_password('')
     time.sleep(3)
 
 
 @then(u'Warning message about filling required fields should be displayed')
 def step_impl(context):
-    try:
-        alert = context.driver.switch_to.alert
-        alertText = alert.text
-        expectedText = 'Incorrect data! Please resolve all field validation errors.'
-        assert alertText.__eq__(expectedText)
-        return True
-    except UnexpectedAlertPresentException:
-        return False
-    except NoAlertPresentException:
-        return False
+    context.register_page = RegisterPage(context.driver)
+    context.register_page.field_validation_warning()
