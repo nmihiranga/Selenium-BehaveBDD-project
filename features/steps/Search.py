@@ -1,9 +1,5 @@
 from behave import *
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
-
 from features.pages.HomePage import HomePage
 from features.pages.SearchResultsPage import SearchResultsPage
 

@@ -7,12 +7,12 @@ Feature: Register account functionality
     And I click on signup button
     Then I should get logged in
     Examples:
-      | firstname  | lastname   | email             | password | confirm_password |
-      | testOneF   | testOneL   | testone@one.com   | A111$bbb | A111$bbb         |
-      | testTwoF   | testTwoL   | testtwo@one.com   | A111$bbb | A111$bbb         |
-      | testThreeF | testThreeL | testthree@one.com | A111$bbb | A111$bbb         |
+      | firstname  | lastname   | email              | password | confirm_password |
+      | testOneF   | testOneL   | testonea@one.com   | A111$bbb | A111$bbb         |
+      | testTwoF   | testTwoL   | testtwoa@one.com   | A111$bbb | A111$bbb         |
+      | testThreeF | testThreeL | testthreea@one.com | A111$bbb | A111$bbb         |
 
-  @register1
+  @register
   Scenario: Register with duplicate email
     Given I navigate to the register page
     When I enter below details into all fields except email
@@ -22,7 +22,7 @@ Feature: Register account functionality
     And I click on signup button
     Then Warning message about existing email should be displayed
 
-  @register1
+  @register
   Scenario: Register without providing any details
     Given I navigate to the register page
     When I don't enter anything into the fields
