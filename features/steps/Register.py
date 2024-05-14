@@ -1,12 +1,5 @@
 from behave import *
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
-from selenium.common.exceptions import UnexpectedAlertPresentException
-from selenium.common.exceptions import NoAlertPresentException
-import os
-
 from features.pages.HomePage import HomePage
 from features.pages.LoginPage import LoginPage
 from features.pages.RegisterPage import RegisterPage
@@ -62,7 +55,6 @@ def step_impl(context, email):
 def step_impl(context):
     context.register_page = RegisterPage(context.driver)
     context.register_page.existing_email_warning()
-
 
 
 @then(u'I don\'t enter anything into the fields')

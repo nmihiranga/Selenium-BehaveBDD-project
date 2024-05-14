@@ -1,15 +1,5 @@
 from behave import *
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
-
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import UnexpectedAlertPresentException
-from selenium.common.exceptions import NoAlertPresentException
-import os
-
 from features.pages.HomePage import HomePage
 from features.pages.LoginPage import LoginPage
 
@@ -39,7 +29,6 @@ def step_impl(context):
 def step_impl(context):
     time.sleep(5)
     context.home_page.check_if_logged_successfully()
-
 
 
 @when(u'I enter invalid email as {invalid_email} and valid password as {valid_password} into the fields')

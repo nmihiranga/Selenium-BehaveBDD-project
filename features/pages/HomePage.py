@@ -2,8 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import UnexpectedAlertPresentException
 from selenium.common.exceptions import NoAlertPresentException
-import os
-
 
 
 class HomePage:
@@ -14,7 +12,6 @@ class HomePage:
     my_account_id = 'myAccount'
     after_login_real_text_xpath = '//*[@id="root"]/div/section/header/nav/div[2]/div[1]/div[1]'
     search_box_id = 'search-field'
-
 
     homepage_title = 'Technology Homepage'
     after_login_expected_alert = 'You are successfully logged in!'
